@@ -1,3 +1,5 @@
+import '@testing-library/cypress/add-commands';
+
 // ***********************************************
 // This example commands.js shows you how to
 // create various custom commands and overwrite
@@ -23,3 +25,31 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+
+Cypress.Commands.add('getElementByText', (selector, text) => {
+  cy.contains(selector, text);
+});
+
+Cypress.Commands.add('assertTodoListLengthIs', (expectedLength) => {
+  cy.findByTestId('todo-list')
+    .children()
+    .should('have.lengthOf', expectedLength);
+});
+
+Cypress.Commands.add('assertLinkHasSelectedClass', (linkText) => {
+  cy.findByRole('link', { name: new RegExp(linkText, 'i') }).should(
+    'have.class',
+    'selected'
+  );
+});
+
+Cypress.Commands.add('clickLinkByText', (linkText) => {
+  cy.findByRole('link', { name: new RegExp(linkText, 'i') }).click();
+});
+
+Cypress.Commands.add('markTodoTaskAsCompleted', (todoItem, todoTaskName) => {
+  cy.getElementByText(todoItem, todoTaskName)
+    .findByTestId('todo-item-toggle')
+    .click()
+    .should('be.checked');
+});

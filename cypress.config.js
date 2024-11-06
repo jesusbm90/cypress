@@ -8,6 +8,6 @@ module.exports = defineConfig({
     baseUrl: 'https://todomvc.com/examples/react/dist/',
     viewportHeight: 1080,
     viewportWidth: 1920,
-    waitForFileChanges: false,
+    watchForFileChanges: false,
   },
 });
