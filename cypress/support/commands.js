@@ -53,3 +53,7 @@ Cypress.Commands.add('markTodoTaskAsCompleted', (todoItem, todoTaskName) => {
     .click()
     .should('be.checked');
 });
+
+Cypress.Commands.add('addTodoTask', (todoTask) => {
+  cy.findByTestId('text-input').type(`${todoTask}{enter}`);
+});
